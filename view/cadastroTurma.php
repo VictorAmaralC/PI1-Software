@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Chamada Biométrica</title>
+    <title>Cadastro Turma</title>
     <link rel="icon" href="../imagens/logo.png">
 
 
@@ -31,13 +31,12 @@
     <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
   </head>
-
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">BioChamada</a>
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="../index.php">Sair</a>
+      <a class="nav-link" href="#">Sair</a>
     </li>
   </ul>
 </nav>
@@ -87,53 +86,95 @@
       </div>
     </div>
     <!-- Conteúdo da página -->
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dados de frequência das suas aulas</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group mr-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Cadastrar Turma</h1>
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            Semana
-          </button>
-          
-        </div>
-      </div>
-
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-
-      <h2>Seus Alunos</h2>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>Frequência</th>
-              <th>Materia</th>
-              <th>Turma</th>
-              <th>Aluno</th>
-              <th>Reprovado/Aprovado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>Lorem</td>
-              <td>ipsum</td>
-              <td>dolor</td>
-              <td>sit</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </main>
-  </div>
+          <form>
+            <div class="container">
+              <div class="row justify-content-start mb-2">
+                <div class="col-5">
+                  <h5>Disciplina:</h5>
+                  <select class="form-control">
+                    <option>Projeto integrador p/ engenharias-I</option>
+                    <option>Estruturas de dados-I</option>
+                    <option>Estruturas de dados-II</option>
+                  </select>
+                </div>
+                <div class="col-3">
+                  <h5 for="LetraTurma">Letra da Turma:</h5>
+                  <input type="letraTurma" class="form-control" id="LetraTurma" placeholder="Ex: A">
+                </div>
+              </div>
+              <div class="row justify-content-start mb-2">
+                <div class="col-5">
+                  <h5 for="horario">Horário:</h5>
+                  <select class="form-control">
+                    <option>08:00 - 10:00</option>
+                    <option>10:00 - 12:00</option>
+                    <option>12:00 - 14:00</option>
+                    <option>14:00 - 16:00</option>
+                    <option>16:00 - 18:00</option>
+                  </select>
+                </div>
+                <div class="col-3">
+                  <h5 for="DiaSemana">Dia:</h5>
+                  <select class="form-control">
+                    <option>Segunda-feira</option>
+                    <option>Terça-feira</option>
+                    <option>Quarta-feira</option>
+                    <option>Quinta-feira</option>
+                    <option>Sexta-feira</option>
+                    <option>Sábado</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-3">
+                  <button type="submit" class="btn btn-dark mt-4">Cadastrar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <h2>Suas Turmas</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>Materia</th>
+                  <th>Turma</th>
+                  <th>Horário de início (horas)</th>
+                  <th>Dia</th>
+                  <th>Nº de Alunos</th>
+                  <th>Frequência (%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Projeto integrador p/ Engenharias-I</td>
+                  <td>A</td>
+                  <td>16</td>
+                  <td>Segunda-Feira</td>
+                  <td>14</td>
+                  <td>98</td>
+                </tr>
+                <tr>
+                  <td>Estruturas de Dados-I</td>
+                  <td>A</td>
+                  <td>16</td>
+                  <td>Terça-Feira</td>
+                  <td>112</td>
+                  <td>95,4</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </main>
+    </div>
 </div>
+
 <script src="../js/jquery-3.3.1.slim.min.js" ></script>
         <script src="../js/feather.min.js"></script>
         <script src="../js/Chart.min.js"></script>
-        <script src="../js/dashboard.js"></script>
-</body>
+        <script src="../js/dashboard.js"></script></body>
 </html>

@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Chamada Biométrica</title>
+    <title>Cadastro Professor</title>
     <link rel="icon" href="../imagens/logo.png">
 
 
@@ -31,13 +31,12 @@
     <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
   </head>
-
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">BioChamada</a>
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="../index.php">Sair</a>
+      <a class="nav-link" href="#">Sair</a>
     </li>
   </ul>
 </nav>
@@ -87,53 +86,63 @@
       </div>
     </div>
     <!-- Conteúdo da página -->
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dados de frequência das suas aulas</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group mr-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Cadastrar Novo Professor</h1>
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            Semana
-          </button>
-          
-        </div>
-      </div>
-
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-
-      <h2>Seus Alunos</h2>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>Frequência</th>
-              <th>Materia</th>
-              <th>Turma</th>
-              <th>Aluno</th>
-              <th>Reprovado/Aprovado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>Lorem</td>
-              <td>ipsum</td>
-              <td>dolor</td>
-              <td>sit</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </main>
-  </div>
+          <form>
+            <div class="container">
+              <div class="row justify-content-start mb-2">
+                <div class="col-3">
+                  <h5 for="NomeAluno">Nome:</h5>
+                  <input type="Nome" class="form-control" id="NomeAluno" placeholder="Nome">
+                </div>
+                <div class="col-3">
+                  <h5 for="SobrenomeAluno">Sobrenome:</h5>
+                  <input type="Nome" class="form-control" id="SobrenomeAluno" placeholder="Sobrenome">
+                </div>
+                <div class="col-3 mb-2">
+                  <h5 for="Matricula">Matrícula:</h5>
+                  <input type="matricula" class="form-control" id="Matricula" placeholder="00/0000000">
+                </div>
+              </div>
+              <div class="row justify-content-start mb-2">
+                <div class="col-3">
+                  <h5 for="tokenAluno">Token:</h5>
+                  <input type="token" class="form-control" id="tokenAluno" placeholder="000">
+                </div>
+                <div class="col-6 mb-2">
+                  <h5 for="Email">Email:</h5>
+                  <input type="Nome" class="form-control" id="Email" placeholder="Ex: professor@email.com">
+                </div>
+              </div>
+              <div class="row justify-content-start mb-2">
+                <div class="col-3">
+                  <h5 for="Senha">Senha:</h5>
+                  <input type="token" class="form-control" id="Senha" placeholder="">
+                </div>
+                <div class="col-3">
+                  <h5 for="ConfirmarSenha">Confirmar Senha:</h5>
+                  <input type="token" class="form-control" id="ConfirmarSenha" placeholder="">
+                </div>
+                <div class="col-3">
+                  <h5 for="fotoAluno">Foto</h5>
+                  <input type="file" class="form-control-file" id="fotoAluno">
+                </div>
+              </div>
+              <div class="row justify-content-center mb-3">
+                <div class="col-3">
+                  <button type="submit" class="btn btn-dark mt-4">Cadastrar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+      </main>
+    </div>
 </div>
+
 <script src="../js/jquery-3.3.1.slim.min.js" ></script>
         <script src="../js/feather.min.js"></script>
         <script src="../js/Chart.min.js"></script>
-        <script src="../js/dashboard.js"></script>
-</body>
+        <script src="../js/dashboard.js"></script></body>
 </html>
