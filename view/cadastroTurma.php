@@ -95,7 +95,7 @@
               <div class="row justify-content-start mb-2">
                 <div class="col-5">
                   <h5>Disciplina:</h5>
-                  <select class="form-control">
+                  <select class="form-control" id="disciplina" type="disciplina">
                     <option>Projeto integrador p/ engenharias-I</option>
                     <option>Estruturas de dados-I</option>
                     <option>Estruturas de dados-II</option>
