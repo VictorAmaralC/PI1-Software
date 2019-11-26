@@ -1,0 +1,5 @@
+site_name: BioChamada
+nav:
+    - Home: index.md
+    - Sobre o projeto: sobre.md
+theme: readthedocs
