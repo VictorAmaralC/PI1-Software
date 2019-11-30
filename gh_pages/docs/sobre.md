@@ -57,19 +57,26 @@ Nº | Issue | Estado
 
 ## Sprint 3
 
-A sprint 3 foi realizada de 21/10/2019 a 27/11/2019 e o foco foi relacionado finalização do Back-end, banco de dados e integração com o Firmware, também foi finalizada a documentação do projeto. Todos estavam presentes na reunião realizada no dia 25/11.
+A sprint 3 foi realizada de 21/10/2019 a 27/11/2019 e o foco foi relacionado ao inicio do processo de finalização do Back-end, banco de dados e integração com o Firmware, também foi finalizada a documentação do projeto. Todos estavam presentes na reunião realizada no dia 25/11.
 
 Nº | Issue | Estado
 -- | ------------ | -------------
 23 | Criação do documento de arquitetura | Fechada
 24 | Documentação de Sprint | Fechada
 25 | GitHub Pages | Fechada
-30 | Cadastrar professor | Fechada
 31 | Alterar CRUD Turma | Fechada
+35 | Integração do CRUD do aluno com páginas de visualizaçã | Fechada
+37 | Modificação do Banco de dados | Fechada
+38 | Integração do CRUD da TURMA com páginas de visualização | Fechada
+
+## Sprint 4
+
+A sprint 4 foi realizada de 28/10/2019 a 02/12/2019 e o foco foi relacionado finalização do Back-end, banco de dados e integração com o Firmware. Todos estavam presentes na reunião realizada no dia 01/11.
+
+Nº | Issue | Estado
+-- | ------------ | -------------
+30 | Cadastrar professor | Fechada
 32 | Calcular porcentagem de alunos presentes no dia da chamada | Fechada
 33 | Criar gráfico de frequência de alunos em cada dia de aula | Fechada
 34 | Criação do README | Fechada
-35 | Integração do CRUD do aluno com páginas de visualizaçã | Fechada
 36 | Integração do CRUD do professor com páginas de visualização | Fechada
-37 | Modificação do Banco de dados | Fechada
-38 | Integração do CRUD da TURMA com páginas de visualização | Fechada
