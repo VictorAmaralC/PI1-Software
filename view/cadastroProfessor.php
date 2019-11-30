@@ -1,4 +1,10 @@
-
+<?php 
+## cadastro professor =1
+$h=fopen('../act.txt','w');
+$conteudo="1";
+fwrite($h,$conteudo);
+fclose($h);
+?>
 <!doctype html>
 <html lang="pt-br">
   <head>
@@ -87,49 +93,55 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Cadastrar Novo Professor</h1>
           </div>
-          <form>
+          <form action="../DAO/professor/insertProfessor.php" method="POST" enctype="multipart/form-data">
             <div class="container">
               <div class="row justify-content-start mb-2">
+              <?php
+                  $arv= fopen("../token.txt","r");
+                  $tam= filesize('../token.txt');
+                  #while(!feof($arv)){
+                    #$linha= fgets($arv);
+                    #$dados =explode(",",$linha);
+                   # $camp1  = $dados[0];
+                  #  $camp2  = $dados[1];
+                  #  $camp3  = $dados[2];
+                 # }
+                  $linha= fgets($arv);
+                  $dados =explode(",",$linha);
+                  $camp1  = $dados[0];
+                echo '<div class="col-3">
+                  <h5 for="Senha">Token:</h5>
+                  <input type="text" class="form-control" name="token"   value= " '.$camp1.' "  placeholder="Digital" readonly>'; ?>
+                  <a href="cadastroProfessor.php?" class="btn btn-primary  active"  btn btn-dark mt-4 role="button" aria-pressed="true">Pegar</a>
+                </div>
                 <div class="col-3">
                   <h5 for="NomeAluno">Nome:</h5>
-                  <input type="Nome" class="form-control" id="NomeAluno" placeholder="Nome">
-                </div>
-                <div class="col-3">
-                  <h5 for="SobrenomeAluno">Sobrenome:</h5>
-                  <input type="Nome" class="form-control" id="SobrenomeAluno" placeholder="Sobrenome">
+                  <input type="text" class="form-control" name="nome" placeholder="Nome">
                 </div>
                 <div class="col-3 mb-2">
-                  <h5 for="Matricula">Matrícula:</h5>
-                  <input type="matricula" class="form-control" id="Matricula" placeholder="00/0000000">
+                  <h5 for="Matricula">Email:</h5>
+                  <input type="text" class="form-control" name="email" placeholder="Ex: professor@email.com">
                 </div>
               </div>
               <div class="row justify-content-start mb-2">
-                <div class="col-3">
-                  <h5 for="tokenAluno">Token:</h5>
-                  <input type="token" class="form-control" id="tokenAluno" placeholder="000">
-                </div>
                 <div class="col-6 mb-2">
-                  <h5 for="Email">Email:</h5>
-                  <input type="Nome" class="form-control" id="Email" placeholder="Ex: professor@email.com">
+                  <h5 for="Email">Matricula:</h5>
+                  <input type="text" class="form-control" name="matricula"  placeholder="00/0000000">
                 </div>
               </div>
               <div class="row justify-content-start mb-2">
                 <div class="col-3">
                   <h5 for="Senha">Senha:</h5>
-                  <input type="token" class="form-control" id="Senha" placeholder="">
-                </div>
-                <div class="col-3">
-                  <h5 for="ConfirmarSenha">Confirmar Senha:</h5>
-                  <input type="token" class="form-control" id="ConfirmarSenha" placeholder="">
+                  <input type="password" class="form-control" name="senha" placeholder="">
                 </div>
                 <div class="col-3">
                   <h5 for="fotoAluno">Foto</h5>
-                  <input type="file" class="form-control-file" id="fotoAluno">
+                  <input type="file" class="form-control-file" name="imagem">
                 </div>
               </div>
               <div class="row justify-content-center mb-3">
                 <div class="col-3">
-                  <button type="submit" class="btn btn-dark mt-4">Cadastrar</button>
+                  <button  type="submit" class="btn btn-dark mt-4">Cadastrar</button>
                 </div>
               </div>
             </div>
