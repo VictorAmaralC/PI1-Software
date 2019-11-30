@@ -74,9 +74,6 @@
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <a class="nav-link" href="fAlunos.php"><span data-feather="bar-chart"></span>Frequência de cada aluno</a>
-          </li>
-          <li class="nav-item">
                     <a class="nav-link" href="fDisciplina.php"><span data-feather="bar-chart-2"></span>Frequência na disciplina</a>
           </li>
           <li class="nav-item">
