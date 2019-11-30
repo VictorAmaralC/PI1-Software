@@ -16,10 +16,11 @@ use biochamada;
 CREATE TABLE PROFESSOR (
     nome varchar(50),
     email varchar(50) PRIMARY KEY,
-    tokenP varchar(50),
+    tokenP varchar(50) NOT NULL,
     foto LONGBLOB,
-    matricula int,
-    senha varchar(50) NOT NULL
+    matricula int NOT NULL,
+    senha varchar(50) NOT NULL,
+ CONSTRAINT PROFESSOR_UN UNIQUE (tokenP,matricula)
 );
 
 CREATE TABLE ALUNO (
@@ -140,6 +141,8 @@ INSERT INTO `SALA` (`local`, `capacidade`) VALUES ('S1', '100'), ('S2', '100'), 
 INSERT INTO `DISCIPLINA` (`nomeDisciplina`, `codigo`) VALUES ('Projeto Integrador 1', '1'), ('MDS', '2'), ('Banco de Dados', '3'), ('Calculo1', '4'), ('Calculo2', '5');
 INSERT INTO `TURMAS` (`turmaNome`, `dia`, `horario`, `codigo`) VALUES ('A', 'segunda-quarta', '10h-12H', '2'), ('A', 'segunda-terça', '10h-12h', '1');
 INSERT INTO `esta` (`turmaNome`, `local`, `codigo`) VALUES ('A', 'S1', '1'), ('A', 'S2', '1');
+INSERT INTO `PROFESSOR` (`nome`, `email`, `tokenP`, `foto`, `matricula`, `senha`) VALUES ('Joenio da Silva', 'joenio@gmail.com', '10', '', '2019101010', '123'), ('Maria da Silva Coelho', 'mariacoelho@gmail.com', '20', '', '2019101011', '123'), ('Edivan Pereira', 'ed.pereira@gmail.com', '30', '', '2019101012', '123'), ('Vanilsa da Rocha Pinto Machado', 'vani.machada@gmail.com', '40', '', '2019101013', '123'), ('Mari Julia somente', 'maju@gmail.com', '50', '', '2019101014', '123');
+
 
 CREATE USER 'admin'@'%' IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;

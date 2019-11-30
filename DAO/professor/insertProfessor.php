@@ -26,5 +26,5 @@ if ( $imagem != "none" ){
   }
 }
 echo $msg;
-header('Location: testeProfessor/testeSELECT.php');
+header('Location:  ../../view/cadastroProfessor.php');
 mysqli_close($conexao);
