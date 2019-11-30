@@ -123,19 +123,19 @@ fclose($h);
                 </div>
                 <div class="col-3 mb-2">
                   <h5 for="Matricula">Email:</h5>
-                  <input type="text" class="form-control" name="email" placeholder="Ex: professor@email.com">
+                  <input type="text" class="form-control" name="email" minlength="7" placeholder="Ex: professor@email.com">
                 </div>
               </div>
               <div class="row justify-content-start mb-2">
                 <div class="col-6 mb-2">
                   <h5 for="Email">Matricula:</h5>
-                  <input type="text" class="form-control" name="matricula"  placeholder="00/0000000">
+                  <input type="text" class="form-control" name="matricula" maxlength="10" minlength="10" placeholder="00/0000000">
                 </div>
               </div>
               <div class="row justify-content-start mb-2">
                 <div class="col-3">
                   <h5 for="Senha">Senha:</h5>
-                  <input type="password" class="form-control" name="senha" placeholder="">
+                  <input type="password" class="form-control" minlength="5" name="senha" placeholder="">
                 </div>
                 <div class="col-3">
                   <h5 for="fotoAluno">Foto</h5>
@@ -149,6 +149,35 @@ fclose($h);
               </div>
             </div>
           </form>
+          <h2>Professores</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Token</th>
+                  <th>Matricula</th>
+                  <th>deletar</th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php
+                include_once '../DAO/professor/selectProfessor.php';
+                while($linha = mysqli_fetch_array($consulta)){
+                    echo '
+                          <tr>
+                            <th>'.$linha['nome'].'</th>
+                            <td>'.$linha['email'].'</td>
+                            <td>'.$linha['tokenP'].'</td>
+                            <td>'.$linha['matricula'].'</td>
+                            <td><a href="../DAO/professor/deleteProfessor.php?email='. $linha['email'].' ">DELLETAR</a></td>
+                          </tr>' ;
+                }
+              ?>
+              </tbody>
+            </table>
+          </div>
       </main>
     </div>
 </div>
