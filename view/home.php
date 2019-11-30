@@ -58,7 +58,7 @@
             <a class="nav-link" href="cadastroProfessor.php"><span data-feather="users"></span>Cadastrar Professor</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="cadastroAluno.php"><span data-feather="users"></span>Cadastrar Aluno</a>
+            <a class="nav-link" href="../act.php?muda=2"><span data-feather="users"></span>Cadastrar Aluno</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="cadastroSala.php"><span data-feather="file-text"></span>Cadastrar Salas</a>

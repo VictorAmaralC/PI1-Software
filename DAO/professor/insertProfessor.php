@@ -1,22 +1,30 @@
 <?php
-
 include_once ('../conexao.php');
-
-$nome=$_POST['nome'];
-$sobrenome=$_POST['sobrenome'];
+echo $nome=$_POST['nome'];
+ 
 $matricula=$_POST['matricula'];
-$token=$_POST['token'];
 $email=$_POST['email'];
-$sql = "insert into SALA values('".$nome."',".$sobrenome.",".$matricula.",".$token.",".$email.")";
+$senha=$_POST['senha'];
+$tokenP=$_POST['token'];
+$imagem = $_FILES['imagem']['tmp_name'];
+$tamanho= $_FILES['imagem']['size'];
+  
+if ( $imagem != "none" ){
+  $fp = fopen($imagem, "rb");
+  $conteudo = fread($fp, $tamanho);
+  $conteudo = addslashes($conteudo);
+  fclose($fp);
+  
+  $sql = "INSERT INTO PROFESSOR (nome, matricula, email, senha, tokenP, foto) VALUES ('$nome', 
+  $matricula,'$email','$senha', '$tokenP','$conteudo')";
+  
 
-if(mysqli_query($conexao,$sql)){
-  //  $msg = "Gravado com sucesso!";
-}else{
-    $msg = "Erro ao gravar!";
+  if(mysqli_query($conexao,$sql)){
+      $msg = "Gravado com sucesso!";
+  }else{
+      $msg = "Erro ao gravar!";
+  }
 }
 echo $msg;
-
-//Direcionar para a pagina que contem todas as salas
 header('Location: testeProfessor/testeSELECT.php');
 mysqli_close($conexao);
-?>
