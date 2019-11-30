@@ -1,4 +1,10 @@
-
+<?php 
+## cadastro aluno =2,chamada=0
+$h=fopen('../act.txt','w');
+$conteudo="2";
+fwrite($h,$conteudo);
+fclose($h);
+?>
 <!doctype html>
 <html lang="pt-br">
   <head>
@@ -73,9 +79,6 @@
           <span>Relatorios</span><a class="d-flex align-items-center text-muted" href="#"><span data-feather="plus-circle"></span></a>
         </h6>
         <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="fAlunos.php"><span data-feather="bar-chart"></span>Frequência de cada aluno</a>
-          </li>
           <li class="nav-item">
                     <a class="nav-link" href="fDisciplina.php"><span data-feather="bar-chart-2"></span>Frequência na disciplina</a>
           </li>

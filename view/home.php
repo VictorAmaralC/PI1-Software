@@ -58,7 +58,7 @@
             <a class="nav-link" href="cadastroProfessor.php"><span data-feather="users"></span>Cadastrar Professor</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="cadastroAluno.php"><span data-feather="users"></span>Cadastrar Aluno</a>
+            <a class="nav-link" href="../act.php?muda=2"><span data-feather="users"></span>Cadastrar Aluno</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="cadastroSala.php"><span data-feather="file-text"></span>Cadastrar Salas</a>
@@ -75,9 +75,6 @@
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <a class="nav-link" href="fAlunos.php"><span data-feather="bar-chart"></span>Frequência de cada aluno</a>
-          </li>
-          <li class="nav-item">
                     <a class="nav-link" href="fDisciplina.php"><span data-feather="bar-chart-2"></span>Frequência na disciplina</a>
           </li>
           <li class="nav-item">
@@ -89,7 +86,7 @@
     <!-- Conteúdo da página -->
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dados de frequência das suas aulas</h1>
+        <h1 class="h2">Dados das suas Disciplinas</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -102,8 +99,8 @@
           
         </div>
       </div>
-
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+      <!-- Gŕafico -->
+    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
 
       <h2>Seus Alunos</h2>
       <div class="table-responsive">
@@ -135,5 +132,30 @@
         <script src="../js/feather.min.js"></script>
         <script src="../js/Chart.min.js"></script>
         <script src="../js/dashboard.js"></script>
+  <!-- Script-Gráfico -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Disciplina', 'Frequencia média dos Alunos(%)', 'Tempo médio de aula(min)'],
+          ['Estruturas de dados-I', 97, 100],
+          ['Projeto integrador-I', 94, 74]
+        ]);
+
+        var options = {
+          chart: {
+          },
+          colors: ['#2921d2', '#854905']
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+
 </body>
 </html>
