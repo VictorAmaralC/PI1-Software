@@ -75,13 +75,17 @@ CREATE TABLE assina (
     matricula int,
     idChamada int,
     presenca enum('P','F'),
-    dh varchar(50)
+    dh varchar(50),
+    CONSTRAINT assina_UN UNIQUE (idChamada,matricula)
+
 );
 
 CREATE TABLE matriculado (
     matricula int,
     turmaNome varchar(50),
-    codigo int
+    codigo int,
+    CONSTRAINT matriculado_UN UNIQUE (matricula,turmaNome,codigo)
+
 );
  
 ALTER TABLE TURMAS ADD CONSTRAINT FK_TURMAS_2
@@ -144,6 +148,8 @@ INSERT INTO `TURMAS` (`turmaNome`, `dia`, `horario`, `codigo`) VALUES ('A', 'seg
 INSERT INTO `esta` (`turmaNome`, `local`, `codigo`) VALUES ('A', 'S1', '1'), ('A', 'S2', '1');
 INSERT INTO `PROFESSOR` (`nome`, `email`, `tokenP`, `foto`, `matricula`, `senha`) VALUES ('Joenio da Silva', 'joenio@gmail.com', '10', '', '2019101010', '123'), ('Maria da Silva Coelho', 'mariacoelho@gmail.com', '20', '', '2019101011', '123'), ('Edivan Pereira', 'ed.pereira@gmail.com', '30', '', '2019101012', '123'), ('Vanilsa da Rocha Pinto Machado', 'vani.machada@gmail.com', '40', '', '2019101013', '123'), ('Mari Julia somente', 'maju@gmail.com', '50', '', '2019101014', '123');
 INSERT INTO `ALUNO` (`matricula`, `nome`, `tokenA`, `foto`) VALUES ('2019543210', 'Iago Lima', '101', NULL), ('2019543211', 'Maria silva', '102', NULL), ('2019543212', 'Maria Joao', '103', NULL), ('2019543213', 'Guilherme Pererira', '104', NULL), ('2019543214', 'Beatriz de Alagoas', '105', NULL), ('2019543215', 'Jose Henrique', '106', NULL), ('2019543216', 'Gabriel Barbosa', '107', NULL), ('2019543217', 'Marta da Silva', '108', NULL), ('2019543218', 'Neymar da Vila', '109', NULL), ('2019543219', 'Clara Rosa', '110', NULL);
+INSERT INTO `ministra` (`email`, `turmaNome`, `codigo`) VALUES ('ed.pereira@gmail.com', 'A', '1'), ('joenio@gmail.com', 'A', '2');
+INSERT INTO `matriculado` (`matricula`, `turmaNome`, `codigo`) VALUES ('2019543210', 'A', '2'), ('2019543211', 'A', '1'), ('2019543212', 'A', '2'), ('2019543213', 'A', '2'), ('2019543214', 'A', '2'), ('2019543216', 'A', '2'), ('2019543217', 'A', '2'), ('2019543218', 'A', '2'), ('2019543219', 'A', '2'), ('2019543210', 'A', '1');
 
 
 CREATE USER 'admin'@'%' IDENTIFIED BY 'admin';

@@ -1,3 +1,10 @@
+<?php 
+## cadastro aluno =2,chamada=0
+$h=fopen('../act.txt','w');
+$conteudo="0";
+fwrite($h,$conteudo);
+fclose($h);
+?>
 <!doctype html>
 <html lang="pt-br">
   <head>

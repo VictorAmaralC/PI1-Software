@@ -64,7 +64,7 @@ fclose($h);
             <a class="nav-link" href="cadastroProfessor.php"><span data-feather="users"></span>Cadastrar Professor</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../act.php?muda=2"><span data-feather="users"></span>Cadastrar Aluno</a>
+            <a class="nav-link" href="cadastroAluno.php"><span data-feather="users"></span>Cadastrar Aluno</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="cadastroSala.php"><span data-feather="file-text"></span>Cadastrar Salas</a>
@@ -74,6 +74,12 @@ fclose($h);
           </li>
           <li class="nav-item">
             <a class="nav-link" href="cadastroTurma.php"><span data-feather="file-text"></span>Cadastrar Turmas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="profTurma.php"><span data-feather="file-text"></span>Atribuir professor/turma</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="alunoTurma.php"><span data-feather="file-text"></span>Matricular aluno/turma</a>
           </li>
         </ul>
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
