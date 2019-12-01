@@ -26,8 +26,9 @@ CREATE TABLE PROFESSOR (
 CREATE TABLE ALUNO (
     matricula int PRIMARY KEY,
     nome varchar(50),
-    tokenA varchar(50),
-    foto LONGBLOB
+    tokenA varchar(50) NOT NULL,
+    foto LONGBLOB,
+    CONSTRAINT PROFESSOR_UN UNIQUE (tokenA,matricula)
 );
 
 CREATE TABLE TURMAS (
@@ -142,6 +143,7 @@ INSERT INTO `DISCIPLINA` (`nomeDisciplina`, `codigo`) VALUES ('Projeto Integrado
 INSERT INTO `TURMAS` (`turmaNome`, `dia`, `horario`, `codigo`) VALUES ('A', 'segunda-quarta', '10h-12H', '2'), ('A', 'segunda-terça', '10h-12h', '1');
 INSERT INTO `esta` (`turmaNome`, `local`, `codigo`) VALUES ('A', 'S1', '1'), ('A', 'S2', '1');
 INSERT INTO `PROFESSOR` (`nome`, `email`, `tokenP`, `foto`, `matricula`, `senha`) VALUES ('Joenio da Silva', 'joenio@gmail.com', '10', '', '2019101010', '123'), ('Maria da Silva Coelho', 'mariacoelho@gmail.com', '20', '', '2019101011', '123'), ('Edivan Pereira', 'ed.pereira@gmail.com', '30', '', '2019101012', '123'), ('Vanilsa da Rocha Pinto Machado', 'vani.machada@gmail.com', '40', '', '2019101013', '123'), ('Mari Julia somente', 'maju@gmail.com', '50', '', '2019101014', '123');
+INSERT INTO `ALUNO` (`matricula`, `nome`, `tokenA`, `foto`) VALUES ('2019543210', 'Iago Lima', '101', NULL), ('2019543211', 'Maria silva', '102', NULL), ('2019543212', 'Maria Joao', '103', NULL), ('2019543213', 'Guilherme Pererira', '104', NULL), ('2019543214', 'Beatriz de Alagoas', '105', NULL), ('2019543215', 'Jose Henrique', '106', NULL), ('2019543216', 'Gabriel Barbosa', '107', NULL), ('2019543217', 'Marta da Silva', '108', NULL), ('2019543218', 'Neymar da Vila', '109', NULL), ('2019543219', 'Clara Rosa', '110', NULL);
 
 
 CREATE USER 'admin'@'%' IDENTIFIED BY 'admin';

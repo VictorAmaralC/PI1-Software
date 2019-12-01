@@ -1,6 +1,6 @@
 <?php
 include_once ('../conexao.php');
-echo $nome=$_POST['nome'];
+$nome=$_POST['nome'];
  
 $matricula=$_POST['matricula'];
 $email=$_POST['email'];

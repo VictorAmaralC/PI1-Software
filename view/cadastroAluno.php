@@ -10,7 +10,7 @@ fclose($h);
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Cadastro Aluno</title>
+    <title>Cadastro Professor</title>
     <link rel="icon" href="../imagens/logo.png">
 
 
@@ -39,7 +39,7 @@ fclose($h);
   </head>
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="home.php">BioChamada</a>
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">BioChamada</a>
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
       <a class="nav-link" href="#">Sair</a>
@@ -91,71 +91,79 @@ fclose($h);
     <!-- Conteúdo da página -->
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Cadastrar Aluno</h1>
+            <h1 class="h2">Cadastrar Novos Alunos</h1>
           </div>
-          <form>
+          <form action="../DAO/aluno/insertAluno.php" method="POST" enctype="multipart/form-data">
             <div class="container">
+              <div class="row justify-content-start mb-2">
+              <?php
+                  $arv= fopen("../token.txt","r");
+                  $tam= filesize('../token.txt');
+                  #while(!feof($arv)){
+                    #$linha= fgets($arv);
+                    #$dados =explode(",",$linha);
+                   # $camp1  = $dados[0];
+                  #  $camp2  = $dados[1];
+                  #  $camp3  = $dados[2];
+                 # }
+                  $linha= fgets($arv);
+                  $dados =explode(",",$linha);
+                  $camp1  = $dados[0];
+                echo '<div class="col-3">
+                  <h5 for="Senha">Token:</h5>
+                  <input  type="text" class="form-control" name="token"  value= " '.$camp1.' "  required readonly>'; ?>
+                  <a href="cadastroAluno.php?" class="btn btn-primary  active"  btn btn-dark mt-4 role="button" aria-pressed="true">Pegar</a>
+                </div>
+              </div>
               <div class="row justify-content-start mb-2">
                 <div class="col-3">
                   <h5 for="NomeAluno">Nome:</h5>
-                  <input type="Nome" class="form-control" id="NomeAluno" placeholder="Nome">
+                  <input type="text" class="form-control" value='asd'  minlength="4" required name="nome" placeholder="Nome">
                 </div>
-                <div class="col-5">
-                  <h5 for="SobrenomeAluno">Sobrenome:</h5>
-                  <input type="Nome" class="form-control" id="SobrenomeAluno" placeholder="Sobrenome">
-                </div>
-                <div class="col-3 mb-2">
-                  <h5 for="Matricula">Matrícula:</h5>
-                  <input type="matricula" class="form-control" id="Matricula" placeholder="00/0000000">
+                <div class="col-6 mb-2">
+                  <h5 for="Email">Matricula:</h5>
+                  <input type="text" class="form-control" name="matricula" maxlength="10" minlength="10" placeholder="00/0000000">
                 </div>
               </div>
               <div class="row justify-content-start mb-2">
+                
                 <div class="col-3">
-                  <h5 for="tokenAluno">Token:</h5>
-                  <input type="token" class="form-control" id="tokenAluno" placeholder="000">
-                </div>
-                <div class="col-5 mb-2">
-                  <h5 for="Materia">Matéria:</h5>
-                  <input type="Nome" class="form-control" id="Materia" placeholder="Ex: Cálculo-I">
-                </div>
-                <div class="col-3 mb-2">
-                  <h5 for="Turma">Turma:</h5>
-                  <input type="Nome" class="form-control" id="Turma" placeholder="Ex: A">
+                  <h5 for="fotoAluno">Foto</h5>
+                  <input type="file" class="form-control-file" name="imagem">
                 </div>
               </div>
-              <div class="row justify-content-between">
+              <div class="row justify-content-center mb-3">
                 <div class="col-3">
-                  <h5 for="fotoAluno">Foto:</h5>
-                  <input type="file" class="form-control-file" id="fotoAluno">
+                  <button  type="submit" class="btn btn-dark mt-4" >Cadastrar</button>
                 </div>
-              </div>
-              <div class="row justify-content-center mb-2">
-                <div class="col-3">
-                  <button type="submit" class="btn btn-dark mt-4">Cadastrar</button>
-                </div>
+    
               </div>
             </div>
           </form>
-          <h2>Seus Alunos</h2>
+          <h2>Alunos</h2>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
-              <thead>
+            <thead>
                 <tr>
-                  <th>Materia</th>
-                  <th>Turma</th>
-                  <th>Aluno</th>
-                  <th>Frequência(%)</th>
-                  <th>Reprovado/Aprovado</th>
+                  <th>Nome</th>
+                  <th>Token</th>
+                  <th>Matricula</th>
+                  <th>deletar</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Projeto integrador p/ Engenharias</td>
-                  <td>A</td>
-                  <td>Victor Amaral</td>
-                  <td>96,5</td>
-                  <td>A definir</td>
-                </tr>
+              <?php
+                include_once '../DAO/aluno/selectAluno.php';
+                while($linha = mysqli_fetch_array($consulta)){
+                    echo '
+                          <tr>
+                            <th>'.$linha['nome'].'</th>
+                            <td>'.$linha['tokenA'].'</td>
+                            <td>'.$linha['matricula'].'</td>
+                            <td><a href="../DAO/aluno/deleteAluno.php?matricula='. $linha['matricula'].' ">DELLETAR</a></td>
+                          </tr>' ;
+                }
+              ?>
               </tbody>
             </table>
           </div>

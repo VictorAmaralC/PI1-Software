@@ -10,7 +10,7 @@
         $msg = "Erro ao deletar!";
     }
     
-    header('Location: testeAluno/testeSELECT.php');
+    header('Location: ../../view/cadastroAluno.php');
     mysqli_close($conexao);    
    
       
