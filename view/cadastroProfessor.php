@@ -10,7 +10,7 @@ fclose($h);
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Cadastro Professor</title>
+    <title>Chamada Biométrica</title>
     <link rel="icon" href="../imagens/logo.png">
 
 
@@ -37,12 +37,13 @@ fclose($h);
     <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
   </head>
+
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">BioChamada</a>
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Sair</a>
+      <a class="nav-link" href="../index.php">Sair</a>
     </li>
   </ul>
 </nav>
@@ -73,6 +74,12 @@ fclose($h);
           </li>
           <li class="nav-item">
             <a class="nav-link" href="cadastroTurma.php"><span data-feather="file-text"></span>Cadastrar Turmas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="profTurma.php"><span data-feather="file-text"></span>Atribuir professor/turma</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="alunoTurma.php"><span data-feather="file-text"></span>Matricular aluno/turma</a>
           </li>
         </ul>
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
