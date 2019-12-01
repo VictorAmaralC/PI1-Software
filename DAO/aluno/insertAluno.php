@@ -1,11 +1,9 @@
 <?php
+
 include_once ('../conexao.php');
 $nome=$_POST['nome'];
- 
 $matricula=$_POST['matricula'];
-$email=$_POST['email'];
-$senha=$_POST['senha'];
-$tokenP=$_POST['token'];
+$token=$_POST['token'];
 $imagem = $_FILES['imagem']['tmp_name'];
 $tamanho= $_FILES['imagem']['size'];
   
@@ -15,8 +13,8 @@ if ( $imagem != "none" ){
   $conteudo = addslashes($conteudo);
   fclose($fp);
   
-  $sql = "INSERT INTO PROFESSOR (nome, matricula, email, senha, tokenP, foto) VALUES ('$nome', 
-  $matricula,'$email','$senha', '$tokenP','$conteudo')";
+  $sql = "INSERT INTO ALUNO (nome, matricula, tokenA, foto) VALUES ('$nome', 
+  $matricula,'$token','$conteudo')";
   
 
   if(mysqli_query($conexao,$sql)){
@@ -26,5 +24,5 @@ if ( $imagem != "none" ){
   }
 }
 echo $msg;
-header('Location:  ../../view/cadastroProfessor.php');
+header('Location:  ../../view/cadastroAluno.php');
 mysqli_close($conexao);
