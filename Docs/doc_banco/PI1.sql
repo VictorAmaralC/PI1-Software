@@ -150,7 +150,19 @@ INSERT INTO `PROFESSOR` (`nome`, `email`, `tokenP`, `foto`, `matricula`, `senha`
 INSERT INTO `ALUNO` (`matricula`, `nome`, `tokenA`, `foto`) VALUES ('2019543210', 'Iago Lima', '101', NULL), ('2019543211', 'Maria silva', '102', NULL), ('2019543212', 'Maria Joao', '103', NULL), ('2019543213', 'Guilherme Pererira', '104', NULL), ('2019543214', 'Beatriz de Alagoas', '105', NULL), ('2019543215', 'Jose Henrique', '106', NULL), ('2019543216', 'Gabriel Barbosa', '107', NULL), ('2019543217', 'Marta da Silva', '108', NULL), ('2019543218', 'Neymar da Vila', '109', NULL), ('2019543219', 'Clara Rosa', '110', NULL);
 INSERT INTO `ministra` (`email`, `turmaNome`, `codigo`) VALUES ('ed.pereira@gmail.com', 'A', '1'), ('joenio@gmail.com', 'A', '2');
 INSERT INTO `matriculado` (`matricula`, `turmaNome`, `codigo`) VALUES ('2019543210', 'A', '2'), ('2019543211', 'A', '1'), ('2019543212', 'A', '2'), ('2019543213', 'A', '2'), ('2019543214', 'A', '2'), ('2019543216', 'A', '2'), ('2019543217', 'A', '2'), ('2019543218', 'A', '2'), ('2019543219', 'A', '2'), ('2019543210', 'A', '1');
-
+INSERT INTO `CHAMADA` (`idChamada`, `dhInicio`, `dhFim`, `email`, `turmaNome`, `codigo`) VALUES (72, '30/11/2019 00:58', '30/11/2019 00:58', 'joenio@gmail.com', 'A', 2),(73, '30/11/2019 00:58', '30/11/2019 00:58', 'joenio@gmail.com', 'A', 2);
+INSERT INTO `assina` (`matricula`, `idChamada`, `presenca`, `dh`) VALUES(2019543210, 72, 'P', '30/11/2019 00:58'),
+(2019543212, 72, 'P', '30/11/2019 00:58'),
+(2019543213, 72, 'P', '30/11/2019 00:58'),
+(2019543214, 72, 'P', '30/11/2019 00:58'),
+(2019543216, 72, 'P', '30/11/2019 00:58'),
+(2019543217, 72, 'P', '30/11/2019 00:58'),
+(2019543218, 72, 'F', NULL),
+(2019543219, 72, 'F', NULL),
+(2019543210, 73, 'P', '30/11/2019 00:58'),
+(2019543212, 73, 'P', '30/11/2019 00:58'),
+(2019543213, 73, 'P', '30/11/2019 00:58'),
+(2019543214, 73, 'P', '30/11/2019 00:58'),(2019543216, 73, 'F', NULL),(2019543217, 73, 'F', NULL),(2019543218, 73, 'F', NULL),(2019543219, 73, 'F', NULL);
 
 CREATE USER 'admin'@'%' IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;

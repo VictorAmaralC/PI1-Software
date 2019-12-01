@@ -2,11 +2,11 @@
 $received = file_get_contents('php://input');
 
 
-$token= $_POST['token'];
-file_put_contents("token.txt", $token);
+#$token= $_POST['token'];
+#file_put_contents("token.txt", $token);
 include_once ('DAO/conexao.php');
 $arv= fopen("token.txt","r");
-$tam= filesize('token.txt');
+#$tam= filesize('token.txt');
 $act = fopen("act.txt","r");
 $veri = fgets($act);
 
@@ -57,11 +57,11 @@ if($veri == "0"){//chamada
                 $query="UPDATE `CHAMADA` SET `dhFim` = '$dh' WHERE `CHAMADA`.`idChamada` = $chamada";
                 $consulta= mysqli_query($conexao,$query);
                 #marcar falta para quem não veio
-                $sql= "SELECT m.matricula FROM ALUNO a 
+                echo $sql= "SELECT m.matricula FROM ALUNO a 
                 INNER JOIN matriculado m on m.matricula=a.matricula and m.turmaNome='$turma' and m.codigo=$codigo
                 where a.matricula not in(
                     SELECT ass.matricula FROM assina ass 
-                    where ass.matricula=a.matricula
+                    where ass.matricula=a.matricula and ass.idChamada=$chamada
                 )";
                 $consulta= mysqli_query($conexao,$sql);
 
