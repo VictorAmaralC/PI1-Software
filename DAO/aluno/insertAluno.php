@@ -4,6 +4,8 @@ include_once ('../conexao.php');
 $nome=$_POST['nome'];
 $matricula=$_POST['matricula'];
 $token=$_POST['token'];
+$token=(int)$token;
+$token=(String)$token;
 $imagem = $_FILES['imagem']['tmp_name'];
 $tamanho= $_FILES['imagem']['size'];
   

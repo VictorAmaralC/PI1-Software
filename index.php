@@ -24,16 +24,16 @@ fclose($h);
   </head>
 
   <body class="text-center">
-    <form class="form-signin" action="view/home.php">
+    <form class="form-signin" action="login.php" method="POST">
       <img class="mb-4" src="imagens/logo.png" alt="" width="220" height="220">
       <h1 class="h3 mb-3 font-weight-normal">Faça login Professor</h1>
       <label for="inputEmail" class="sr-only">Endereço de email</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Seu email" required autofocus>
+      <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Seu email" required autofocus>
       <label for="inputPassword" class="sr-only">Senha</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+      <input type="password" id="inputPassword" class="form-control" name="senha" placeholder="Senha" required>
       <div class="checkbox mb-3">
         <label>
-          <input type="checkbox" value="remember-me"> Lembrar de mim
+          <input type="checkbox" value="remember-me" required> Lembrar de mim
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>

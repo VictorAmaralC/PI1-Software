@@ -57,9 +57,7 @@ fclose($h);
           <li class="nav-item">
             <a class="nav-link active" href="home.php"><span data-feather="home"></span>Inicio<span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="perfil.php"><span data-feather="user"></span>Perfil<span class="sr-only">(current)</span></a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="cadastroProfessor.php"><span data-feather="users"></span>Cadastrar Professor</a>
           </li>
@@ -82,47 +80,15 @@ fclose($h);
             <a class="nav-link" href="alunoTurma.php"><span data-feather="file-text"></span>Matricular aluno/turma</a>
           </li>
         </ul>
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Relatorios</span><a class="d-flex align-items-center text-muted" href="#"><span data-feather="plus-circle"></span></a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-                    <a class="nav-link" href="fDisciplina.php"><span data-feather="bar-chart-2"></span>Frequência na disciplina</a>
-          </li>
-          <li class="nav-item">
-                    <a class="nav-link" href="tempoAula.php"><span data-feather="clock"></span>Tempo médio de aula</a>
-          </li>
-        </ul>
+
       </div>
     </div>
     <!-- Conteúdo da página -->
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-       <h2>Seus Alunos</h2>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>Frequência</th>
-              <th>Materia</th>
-              <th>Turma</th>
-              <th>Aluno</th>
-              <th>Reprovado/Aprovado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>Lorem</td>
-              <td>ipsum</td>
-              <td>dolor</td>
-              <td>sit</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+
       
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Frequência de Aluno por Disciplina (%)</h1>
+        <h1 class="h2">Todal de alunos por disciplina</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -137,7 +103,33 @@ fclose($h);
       </div>
       <!-- Gŕafico -->
       <div id="curve_chart" style="width: 900px; height: 500px"></div>
-
+      <h2>Alunos</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                  <th>Chamada</th>
+                  <th>Alunos</th>
+                  <th>Presença</th>
+                  <th>Data</th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php
+                include_once '../DAO/frequencia/selectAssina.php';
+                while($linha = mysqli_fetch_array($consulta)){
+                    echo '
+                          <tr>
+                            <th>'.$linha['idChamada'].'</th>
+                            <th>'.$linha['nome'].'</th>
+                            <td>'.$linha['presenca'].'</td>
+                            <td>'.$linha['dh'].'</td>
+                           </tr>' ;
+                }
+              ?>
+              </tbody>
+            </table>
+          </div>
     </main>
   </div>
 </div>
@@ -154,7 +146,28 @@ fclose($h);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Mês', 'Estrutura de Dados-I', 'Projeto Integrador p/ Engenharias-I'],
-          ['Agosto',  96,      95],
+          <?php
+            include_once '../DAO/conexao.php';
+            $query= "SELECT COUNT(a.presenca) as cont,c.dhInicio as dh,c.idChamada as chamada  FROM assina a 
+                      INNER JOIN CHAMADA c on a.idChamada=c.idChamada
+                      where a.presenca='F' GROUP BY c.idChamada";
+            $consulta= mysqli_query($conexao,$query);
+            while($linha = mysqli_fetch_array($consulta)){
+              $falta =(float)$linha['cont'];
+              $dia=$linha['dh'];
+              $camp=explode(" ",$dia);
+              $camp=$camp[0];
+              $chamada=$linha['chamada'];
+              $q= "SELECT COUNT(presenca) as tam FROM assina where idChamada=$chamada";
+              $con= mysqli_query($conexao,$q);
+              $l = mysqli_fetch_array($con);
+              $total=(float)$l['tam'];
+              $falta=($falta/$total)*100;
+              $pre=100-$falta;
+              echo "['$camp', $pre, $falta],";
+            }
+          ?>
+          ['Agosto',  96,      0],
           ['Setembro',  97,    97],
           ['Outubro',  95,      89],
           ['Novembro',  99,    92],

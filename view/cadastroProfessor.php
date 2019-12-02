@@ -57,9 +57,7 @@ fclose($h);
           <li class="nav-item">
             <a class="nav-link active" href="home.php"><span data-feather="home"></span>Inicio<span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="perfil.php"><span data-feather="user"></span>Perfil<span class="sr-only">(current)</span></a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="cadastroProfessor.php"><span data-feather="users"></span>Cadastrar Professor</a>
           </li>
@@ -82,17 +80,7 @@ fclose($h);
             <a class="nav-link" href="alunoTurma.php"><span data-feather="file-text"></span>Matricular aluno/turma</a>
           </li>
         </ul>
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Relatorios</span><a class="d-flex align-items-center text-muted" href="#"><span data-feather="plus-circle"></span></a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-                    <a class="nav-link" href="fDisciplina.php"><span data-feather="bar-chart-2"></span>Frequência na disciplina</a>
-          </li>
-          <li class="nav-item">
-                    <a class="nav-link" href="tempoAula.php"><span data-feather="clock"></span>Tempo médio de aula</a>
-          </li>
-        </ul>
+
       </div>
     </div>
     <!-- Conteúdo da página -->
@@ -133,7 +121,7 @@ fclose($h);
               <div class="row justify-content-start mb-2">
                 <div class="col-6 mb-2">
                   <h5 for="Email">Matricula:</h5>
-                  <input type="text" class="form-control" name="matricula" maxlength="10" minlength="10" placeholder="00/0000000">
+                  <input type="text" class="form-control" name="matricula" maxlength="7" minlength="7" placeholder="00/0000000">
                 </div>
               </div>
               <div class="row justify-content-start mb-2">

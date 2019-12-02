@@ -57,9 +57,7 @@ fclose($h);
           <li class="nav-item">
             <a class="nav-link active" href="home.php"><span data-feather="home"></span>Inicio<span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="perfil.php"><span data-feather="user"></span>Perfil<span class="sr-only">(current)</span></a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="cadastroProfessor.php"><span data-feather="users"></span>Cadastrar Professor</a>
           </li>
@@ -82,93 +80,94 @@ fclose($h);
             <a class="nav-link" href="alunoTurma.php"><span data-feather="file-text"></span>Matricular aluno/turma</a>
           </li>
         </ul>
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Relatorios</span><a class="d-flex align-items-center text-muted" href="#"><span data-feather="plus-circle"></span></a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-                    <a class="nav-link" href="fDisciplina.php"><span data-feather="bar-chart-2"></span>Frequência na disciplina</a>
-          </li>
-          <li class="nav-item">
-                    <a class="nav-link" href="tempoAula.php"><span data-feather="clock"></span>Tempo médio de aula</a>
-          </li>
-        </ul>
+
       </div>
     </div>
     <!-- Conteúdo da página -->
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Cadastrar Novos Alunos</h1>
+            <h1 class="h2">Cadastrar Aluno a turma</h1>
           </div>
-          <form action="../DAO/aluno/insertAluno.php" method="POST" enctype="multipart/form-data">
+          <form action="../DAO/insertAlunoTurma.php" method="POST" enctype="multipart/form-data">
             <div class="container">
               <div class="row justify-content-start mb-2">
-              <?php
-                  $arv= fopen("../token.txt","r");
-                  $tam= filesize('../token.txt');
-                  #while(!feof($arv)){
-                    #$linha= fgets($arv);
-                    #$dados =explode(",",$linha);
-                   # $camp1  = $dados[0];
-                  #  $camp2  = $dados[1];
-                  #  $camp3  = $dados[2];
-                 # }
-                  $linha= fgets($arv);
-                  $dados =explode(",",$linha);
-                  $camp1  = $dados[0];
-                echo '<div class="col-3">
-                  <h5 for="Senha">Token:</h5>
-                  <input  type="text" class="form-control" name="token"  value= " '.$camp1.' "  required readonly>'; ?>
-                  <a href="cadastroAluno.php?" class="btn btn-primary  active"  btn btn-dark mt-4 role="button" aria-pressed="true">Pegar</a>
-                </div>
+              <div class="col-3">
+              <h5>Alunos:</h5>
+                <select class="form-control" name="matricula" >
+                    <?php
+                      include_once "../DAO/conexao.php";
+                      $query= "SELECT matricula,nome FROM ALUNO ";
+                      $consulta= mysqli_query($conexao,$query);
+                      while($linha = mysqli_fetch_array($consulta)){
+                          echo '<option  value="'.$linha['matricula'].'">'.$linha['nome'].'</option>' ;
+                      }
+                    ?>
+                </select>
               </div>
-              <div class="row justify-content-start mb-2">
-                <div class="col-3">
-                  <h5 for="NomeAluno">Nome:</h5>
-                  <input type="text" class="form-control" value='asd'  minlength="4" required name="nome" placeholder="Nome">
+              <div class="row justify-content-start mb-5">
+                <div class="col-6">
+                  <h5 for="NomeAluno">Disciplina</h5>
+                  <select class="form-control" name="codigo" id="codigo">
+                    <?php
+                      include_once "../DAO/conexao.php";
+                      $query= "SELECT t.codigo,t.turmaNome,d.nomeDisciplina FROM TURMAS t INNER JOIN DISCIPLINA d on d.codigo=t.codigo ";
+                      $consulta= mysqli_query($conexao,$query);
+                      while($linha = mysqli_fetch_array($consulta)){
+                          echo '<option  value="'.$linha['codigo'].'">'.$linha['nomeDisciplina'].'</option>' ;
+                      
+                      }
+                    ?>
+                  </select>
                 </div>
                 <div class="col-6 mb-2">
-                  <h5 for="Email">Matricula:</h5>
-                  <input type="text" class="form-control" name="matricula" maxlength="10" minlength="10" placeholder="00/0000000">
-                </div>
+                  <h5 for="Email">Turmas</h5>
+                    <select class="form-control" name="turmaNome" >
+                      <?php
+                        include_once "../DAO/conexao.php";
+                        $query= "SELECT turmaNome FROM TURMAS GROUP BY turmaNome ";
+                        $consulta= mysqli_query($conexao,$query);
+                        while($linha = mysqli_fetch_array($consulta)){
+                            echo '<option  value="'.$linha['turmaNome'].'">'.$linha['turmaNome'].'</option>' ;
+                        
+                        }
+                      $codigoTurma=$linha['codigo'];
+                      ?>
+                    </select>
+                  </div>
               </div>
               <div class="row justify-content-start mb-2">
-                
-                <div class="col-3">
-                  <h5 for="fotoAluno">Foto</h5>
-                  <input type="file" class="form-control-file" name="imagem">
-                </div>
+
               </div>
-              <div class="row justify-content-center mb-3">
+              <div class="row justify-content-center">
                 <div class="col-3">
-                  <button  type="submit" class="btn btn-dark mt-4" >Cadastrar</button>
+                  <button type="submit" class="btn btn-dark mt-4">Cadastrar</button>
                 </div>
-    
               </div>
             </div>
           </form>
-          <h2>Alunos</h2>
+          <h2>Respectivas turmas dos professores</h2>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
             <thead>
                 <tr>
                   <th>Nome</th>
-                  <th>Token</th>
-                  <th>Matricula</th>
-                  <th>deletar</th>
+                  <th>codigo</th>
+                  <th>turma</th>
                 </tr>
               </thead>
               <tbody>
               <?php
-                include_once '../DAO/aluno/selectAluno.php';
+                include_once "../DAO/conexao.php";
+                $query= "SELECT a.nome as nome,m.codigo as codigo,m.turmaNome as turmaNome FROM matriculado m INNER JOIN ALUNO a on a.matricula=m.matricula ";
+                $consulta= mysqli_query($conexao,$query);
+                
                 while($linha = mysqli_fetch_array($consulta)){
-                    echo '
-                          <tr>
-                            <th>'.$linha['nome'].'</th>
-                            <td>'.$linha['tokenA'].'</td>
-                            <td>'.$linha['matricula'].'</td>
-                            <td><a href="../DAO/aluno/deleteAluno.php?matricula='. $linha['matricula'].' ">DELLETAR</a></td>
-                          </tr>' ;
+                  echo '
+                        <tr>
+                          <td>'.$linha['nome'].'</td>
+                          <td>'.$linha['codigo'].'</td>
+                          <td>'.$linha['turmaNome'].'</td>
+                        </tr>' ;
                 }
               ?>
               </tbody>
