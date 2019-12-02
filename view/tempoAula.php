@@ -39,10 +39,8 @@ fclose($h);
   </head>
 
   <body>
-  
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">BioChamada
-</a>
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">BioChamada</a>
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
       <a class="nav-link" href="../index.php">Sair</a>
@@ -87,8 +85,30 @@ fclose($h);
     </div>
     <!-- Conteúdo da página -->
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+       <h2>Suas Disciplinas</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>Materia</th>
+                  <th>Codigo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Projeto integrador p/ Engenharias-I</td>
+                  <td>193861</td>
+                </tr>
+                <tr>
+                  <td>Estruturas de dados-I</td>
+                  <td>193704</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Frequência por chamada</h1>
+        <h1 class="h2">Tempo médio de aula por Disciplina (Min.)</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -102,95 +122,41 @@ fclose($h);
         </div>
       </div>
       <!-- Gŕafico -->
-    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
-
-      <h2>Frequência de todos aos Alunos</h2>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>Aluno</th>
-              <th>Materia</th>
-              <th>Turma</th>
-              <th>Dia</th>
-              <th>Prença(P)/Falta(F)</th>
-            </tr>
-          </thead>
-          <tbody>
-          <?php
-            include_once "../DAO/conexao.php";
-            $query= "SELECT * FROM `frequencia_alunos` ORDER BY `nome` ASC";
-            $consulta= mysqli_query($conexao,$query);
-            
-            while($linha = mysqli_fetch_array($consulta)){
-              echo '
-                    <tr>
-                      <th>'.$linha['nome'].'</th>
-                      <td>'.$linha['nomeDisciplina'].'</td>
-                      <td>'.$linha['turmaNome'].'</td>
-                      <td>'.$linha['dh'].'</td>
-                      <td>'.$linha['presenca'].'</td>
-                    </tr>' ;
-            }
-          ?>
-          </tbody>
-        </table>
-      </div>
+      <div id="curve_chart" style="width: 900px; height: 500px"></div>
 
     </main>
   </div>
 </div>
-
-
-
 <script src="../js/jquery-3.3.1.slim.min.js" ></script>
         <script src="../js/feather.min.js"></script>
         <script src="../js/Chart.min.js"></script>
         <script src="../js/dashboard.js"></script>
-  <!-- Script-Gráfico -->           
-
+<!-- Script-Gráfico -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
+      google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
-     
+
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Data', 'Presença dos Alunos(%)', 'Falta dos Alunos(%)'],
-          <?php
-            include_once '../DAO/conexao.php';
-            $query= "SELECT COUNT(a.presenca) as cont,c.dhInicio as dh,c.idChamada as chamada  FROM assina a 
-                      INNER JOIN CHAMADA c on a.idChamada=c.idChamada
-                      where a.presenca='F' GROUP BY c.idChamada";
-            $consulta= mysqli_query($conexao,$query);
-            while($linha = mysqli_fetch_array($consulta)){
-              $falta =(float)$linha['cont'];
-              $dia=$linha['dh'];
-              $camp=explode(" ",$dia);
-              $camp=$camp[0];
-              $chamada=$linha['chamada'];
-              $q= "SELECT COUNT(presenca) as tam FROM assina where idChamada=$chamada";
-              $con= mysqli_query($conexao,$q);
-              $l = mysqli_fetch_array($con);
-              $total=(float)$l['tam'];
-              $falta=($falta/$total)*100;
-              $pre=100-$falta;
-              echo "['$camp', $pre, $falta],";
-            }
-          ?>
+          ['Mês', 'Estrutura de Dados-I', 'Projeto Integrador p/ Engenharias-I'],
+          ['Agosto',  100,74],
+          ['Setembro',97,66],
+          ['Outubro', 103,82],
+          ['Novembro',112,77],
+          ['Dezembro',88,71]
         ]);
 
         var options = {
-          chart: {
-          },
+          curveType: 'function',
+          legend: { position: 'bottom' },
           colors: ['#2921d2', '#854905']
         };
 
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-        chart.draw(data, google.charts.Bar.convertOptions(options));
+        chart.draw(data, options);
       }
     </script>
-
 </body>
 </html>

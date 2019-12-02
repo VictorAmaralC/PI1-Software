@@ -1,10 +1,14 @@
-# PI1-Software
-Repositório de atividades relacionadas a matéria de Projeto integrador para engenharias 1 da UnB
-# Bootstrap:
-    https://getbootstrap.com.br/docs/4.1/getting-started/introduction/
-# Executando PHP:
-    Versão: PHP 7.2.24
-    execute o comando no terminal:
-        php -S localhost:8000
-    Vai para o browser da sua escolha e pesquise por:
-        localhost:8000
+# BioChamada
+
+![Logo](imagens/logo.png)
+
+## Descrição
+
+BioChamada é uma aplicação *web* desenvolvida em [*PHP*](https://www.php.net/docs.php) para auxiliar no controle de frequência de estudantes nas aulas.
+Foi idealizada para ser integrada com um dispositivo biométrico com conexão *wireless*, para *realizar a chamada* em sala de aula coletando a digital dos estudantes.
+
+### Funcionalidades
+BioChamada possui funcionalidades para auxiliar professores ou instituições no controle de frequência em sala de aula, dentre as quais possui:
+- Cadastro dos alunos matriculados nas turmas
+- Listagem de alunos do professor
+- Geração de gráficos referente à presença nas aulas
