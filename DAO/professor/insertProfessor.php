@@ -6,6 +6,8 @@ $matricula=$_POST['matricula'];
 $email=$_POST['email'];
 $senha=$_POST['senha'];
 $tokenP=$_POST['token'];
+$tokenP=(int)$tokenP;
+$tokenP=(String)$tokenP;
 $imagem = $_FILES['imagem']['tmp_name'];
 $tamanho= $_FILES['imagem']['size'];
   

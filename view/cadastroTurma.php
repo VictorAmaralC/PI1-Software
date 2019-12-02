@@ -57,9 +57,7 @@ fclose($h);
           <li class="nav-item">
             <a class="nav-link active" href="home.php"><span data-feather="home"></span>Inicio<span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="perfil.php"><span data-feather="user"></span>Perfil<span class="sr-only">(current)</span></a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="cadastroProfessor.php"><span data-feather="users"></span>Cadastrar Professor</a>
           </li>
@@ -82,17 +80,7 @@ fclose($h);
             <a class="nav-link" href="alunoTurma.php"><span data-feather="file-text"></span>Matricular aluno/turma</a>
           </li>
         </ul>
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Relatorios</span><a class="d-flex align-items-center text-muted" href="#"><span data-feather="plus-circle"></span></a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-                    <a class="nav-link" href="fDisciplina.php"><span data-feather="bar-chart-2"></span>Frequência na disciplina</a>
-          </li>
-          <li class="nav-item">
-                    <a class="nav-link" href="tempoAula.php"><span data-feather="clock"></span>Tempo médio de aula</a>
-          </li>
-        </ul>
+
       </div>
     </div>
     <!-- Conteúdo da página -->
@@ -100,26 +88,31 @@ fclose($h);
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Cadastrar Turma</h1>
           </div>
-          <form>
+          <form action="../DAO/turmas/insertTurmas.php" method="POST" >
             <div class="container">
               <div class="row justify-content-start mb-2">
                 <div class="col-5">
                   <h5>Disciplina:</h5>
-                  <select class="form-control">
-                    <option>Projeto integrador p/ engenharias-I</option>
-                    <option>Estruturas de dados-I</option>
-                    <option>Estruturas de dados-II</option>
+                  <select class="form-control" name="codigo" >
+                    <?php
+                      include_once "../DAO/conexao.php";
+                      $query= "SELECT codigo,nomeDisciplina FROM DISCIPLINA ";
+                      $consulta= mysqli_query($conexao,$query);
+                      while($linha = mysqli_fetch_array($consulta)){
+                          echo '<option  value="'.$linha['codigo'].'">'.$linha['nomeDisciplina'].'</option>' ;
+                      }
+                    ?>
                   </select>
                 </div>
                 <div class="col-3">
                   <h5 for="LetraTurma">Letra da Turma:</h5>
-                  <input type="letraTurma" class="form-control" id="LetraTurma" placeholder="Ex: A">
+                  <input type="letraTurma" class="form-control" name="turmaNome" placeholder="Ex: A">
                 </div>
               </div>
               <div class="row justify-content-start mb-2">
                 <div class="col-5">
                   <h5 for="horario">Horário:</h5>
-                  <select class="form-control">
+                  <select class="form-control" name="horario">
                     <option>08:00 - 10:00</option>
                     <option>10:00 - 12:00</option>
                     <option>12:00 - 14:00</option>
@@ -129,7 +122,7 @@ fclose($h);
                 </div>
                 <div class="col-3">
                   <h5 for="DiaSemana">Dia:</h5>
-                  <select class="form-control">
+                  <select class="form-control" name="dia">
                     <option>Segunda-feira</option>
                     <option>Terça-feira</option>
                     <option>Quarta-feira</option>
@@ -146,36 +139,31 @@ fclose($h);
               </div>
             </div>
           </form>
+
           <h2>Suas Turmas</h2>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               <thead>
-                <tr>
-                  <th>Materia</th>
+                <tr>                  
                   <th>Turma</th>
-                  <th>Horário de início (horas)</th>
                   <th>Dia</th>
-                  <th>Nº de Alunos</th>
-                  <th>Frequência (%)</th>
+                  <th>Horário de início (horas)</th>
+                  <th>Codigo Disciplina</th>      
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Projeto integrador p/ Engenharias-I</td>
-                  <td>A</td>
-                  <td>16</td>
-                  <td>Segunda-Feira</td>
-                  <td>14</td>
-                  <td>98</td>
-                </tr>
-                <tr>
-                  <td>Estruturas de Dados-I</td>
-                  <td>A</td>
-                  <td>16</td>
-                  <td>Terça-Feira</td>
-                  <td>112</td>
-                  <td>95,4</td>
-                </tr>
+              <?php
+                include_once '../DAO/turmas/selectTurmas.php';
+                while($linha = mysqli_fetch_array($consulta)){
+                    echo '
+                          <tr>
+                            <th>'.$linha['turmaNome'].'</th>
+                            <td>'.$linha['dia'].'</td>
+                            <td>'.$linha['horario'].'</td>
+                            <td>'.$linha['codigo'].'</td>
+                          </tr>' ;
+                }
+              ?>
               </tbody>
             </table>
           </div>

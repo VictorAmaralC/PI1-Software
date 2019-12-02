@@ -57,9 +57,7 @@ fclose($h);
           <li class="nav-item">
             <a class="nav-link active" href="home.php"><span data-feather="home"></span>Inicio<span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="perfil.php"><span data-feather="user"></span>Perfil<span class="sr-only">(current)</span></a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="cadastroProfessor.php"><span data-feather="users"></span>Cadastrar Professor</a>
           </li>
@@ -82,17 +80,7 @@ fclose($h);
             <a class="nav-link" href="alunoTurma.php"><span data-feather="file-text"></span>Matricular aluno/turma</a>
           </li>
         </ul>
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Relatorios</span><a class="d-flex align-items-center text-muted" href="#"><span data-feather="plus-circle"></span></a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-                    <a class="nav-link" href="fDisciplina.php"><span data-feather="bar-chart-2"></span>Frequência na disciplina</a>
-          </li>
-          <li class="nav-item">
-                    <a class="nav-link" href="tempoAula.php"><span data-feather="clock"></span>Tempo médio de aula</a>
-          </li>
-        </ul>
+
       </div>
     </div>
     <!-- Conteúdo da página -->
@@ -100,16 +88,16 @@ fclose($h);
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Cadastrar Disciplina</h1>
           </div>
-          <form>
+          <form  action="../DAO/insertDisciplina.php" method="POST" >
             <div class="container">
               <div class="row justify-content-start mb-2">
                 <div class="col-6">
                   <h5 for="nomeDisciplina">Disciplina a ser ministrada:</h5>
-                  <input type="NomeDisciplina" class="form-control" id="nomeDisciplina" placeholder="Ex: Calculo-I">
+                  <input type="NomeDisciplina" class="form-control" name="nomeDisciplina" placeholder="Ex: Calculo-I">
                 </div>
                 <div class="col-2 mb-2">
                   <h5 for="Codigo">Codigo:</h5>
-                  <input type="Codigo" class="form-control" id="Codigo" placeholder="Ex: 142536">
+                  <input type="Codigo" class="form-control" name="codigo" placeholder="Ex: 142536">
                 </div>
               </div>
               <div class="row justify-content-center mb-3">
@@ -123,20 +111,19 @@ fclose($h);
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               <thead>
-                <tr>
-                  <th>Materia</th>
-                  <th>Codigo</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Projeto integrador p/ Engenharias-I</td>
-                  <td>193861</td>
-                </tr>
-                <tr>
-                  <td>Estruturas de dados-I</td>
-                  <td>193704</td>
-                </tr>
+                <?php
+                  include_once "../DAO/conexao.php";
+                  $query= "SELECT * FROM DISCIPLINA ";
+                  $consulta= mysqli_query($conexao,$query);
+                  
+                  while($linha = mysqli_fetch_array($consulta)){
+                      echo '
+                            <tr>
+                              <td>'.$linha['nomeDisciplina'].'</td>
+                              <td>'.$linha['codigo'].'</td>
+                            </tr>' ;
+                  }
+                ?>
               </tbody>
             </table>
           </div>

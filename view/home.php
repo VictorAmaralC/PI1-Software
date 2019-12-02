@@ -39,8 +39,10 @@ fclose($h);
   </head>
 
   <body>
+  
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">BioChamada</a>
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">BioChamada
+</a>
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
       <a class="nav-link" href="../index.php">Sair</a>
@@ -57,9 +59,7 @@ fclose($h);
           <li class="nav-item">
             <a class="nav-link active" href="home.php"><span data-feather="home"></span>Inicio<span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="perfil.php"><span data-feather="user"></span>Perfil<span class="sr-only">(current)</span></a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="cadastroProfessor.php"><span data-feather="users"></span>Cadastrar Professor</a>
           </li>
@@ -82,23 +82,13 @@ fclose($h);
             <a class="nav-link" href="alunoTurma.php"><span data-feather="file-text"></span>Matricular aluno/turma</a>
           </li>
         </ul>
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Relatorios</span><a class="d-flex align-items-center text-muted" href="#"><span data-feather="plus-circle"></span></a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-                    <a class="nav-link" href="fDisciplina.php"><span data-feather="bar-chart-2"></span>Frequência na disciplina</a>
-          </li>
-          <li class="nav-item">
-                    <a class="nav-link" href="tempoAula.php"><span data-feather="clock"></span>Tempo médio de aula</a>
-          </li>
-        </ul>
+
       </div>
     </div>
     <!-- Conteúdo da página -->
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dados das suas Disciplinas</h1>
+        <h1 class="h2">Frequência por chamada</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -114,47 +104,80 @@ fclose($h);
       <!-- Gŕafico -->
     <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
 
-      <h2>Seus Alunos</h2>
+      <h2>Frequência de todos aos Alunos</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th>Frequência</th>
+              <th>Aluno</th>
               <th>Materia</th>
               <th>Turma</th>
-              <th>Aluno</th>
-              <th>Reprovado/Aprovado</th>
+              <th>Dia</th>
+              <th>Prença(P)/Falta(F)</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>Lorem</td>
-              <td>ipsum</td>
-              <td>dolor</td>
-              <td>sit</td>
-            </tr>
+          <?php
+            include_once "../DAO/conexao.php";
+            $query= "SELECT * FROM `frequencia_alunos` ORDER BY `nome` ASC";
+            $consulta= mysqli_query($conexao,$query);
+            
+            while($linha = mysqli_fetch_array($consulta)){
+              echo '
+                    <tr>
+                      <th>'.$linha['nome'].'</th>
+                      <td>'.$linha['nomeDisciplina'].'</td>
+                      <td>'.$linha['turmaNome'].'</td>
+                      <td>'.$linha['dh'].'</td>
+                      <td>'.$linha['presenca'].'</td>
+                    </tr>' ;
+            }
+          ?>
           </tbody>
         </table>
       </div>
+
     </main>
   </div>
 </div>
+
+
+
 <script src="../js/jquery-3.3.1.slim.min.js" ></script>
         <script src="../js/feather.min.js"></script>
         <script src="../js/Chart.min.js"></script>
         <script src="../js/dashboard.js"></script>
-  <!-- Script-Gráfico -->
+  <!-- Script-Gráfico -->           
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
-
+     
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Disciplina', 'Frequencia média dos Alunos(%)', 'Tempo médio de aula(min)'],
-          ['Estruturas de dados-I', 97, 100],
-          ['Projeto integrador-I', 94, 74]
+          ['Data', 'Presença dos Alunos(%)', 'Falta dos Alunos(%)'],
+          <?php
+            include_once '../DAO/conexao.php';
+            $query= "SELECT COUNT(a.presenca) as cont,c.dhInicio as dh,c.idChamada as chamada  FROM assina a 
+                      INNER JOIN CHAMADA c on a.idChamada=c.idChamada
+                      where a.presenca='F' GROUP BY c.idChamada";
+            $consulta= mysqli_query($conexao,$query);
+            while($linha = mysqli_fetch_array($consulta)){
+              $falta =(float)$linha['cont'];
+              $dia=$linha['dh'];
+              $camp=explode(" ",$dia);
+              $camp=$camp[0];
+              $chamada=$linha['chamada'];
+              $q= "SELECT COUNT(presenca) as tam FROM assina where idChamada=$chamada";
+              $con= mysqli_query($conexao,$q);
+              $l = mysqli_fetch_array($con);
+              $total=(float)$l['tam'];
+              $falta=($falta/$total)*100;
+              $pre=100-$falta;
+              echo "['$camp', $pre, $falta],";
+            }
+          ?>
         ]);
 
         var options = {

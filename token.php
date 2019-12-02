@@ -69,7 +69,7 @@ if($veri == "0"){//chamada
                     $matricula=$linha['matricula'];
                     echo "<br>".$matricula;
                     #inseriondo dados
-                    $sql = "insert into assina(matricula,idChamada,presenca) values(".$matricula.",".$chamada.",'F')";
+                    $sql = "insert into assina(matricula,idChamada,presenca,dh) values(".$matricula.",".$chamada.",'F','$dh')";
                     mysqli_query($conexao,$sql);
                 }
             }
