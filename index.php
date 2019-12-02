@@ -33,12 +33,12 @@ fclose($h);
       <input type="password" id="inputPassword" class="form-control" name="senha" placeholder="Senha" required>
       <div class="checkbox mb-3">
         <label>
-          <input type="checkbox" value="remember-me" required> Lembrar de mim
+          <input type="checkbox" value="remember-me" required>  <a href="termo.php" class="btn btn-link btn-sm">
+        Aceito os termos.
+      </a>
         </label>
       </div>
-      <a href="termo.php" class="btn btn-link btn-sm">
-        Esteja ciente do termo para utilização do website. Leia aqui!
-      </a>
+     
       <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
       
       <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
